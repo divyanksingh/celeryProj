@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from tasks import print_hello, get_unread_emails
 
 if __name__ == "__main__":
