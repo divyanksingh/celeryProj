@@ -19,3 +19,13 @@ def mail_parser(mail_content):
 		return None
 		
 	return event_data
+
+def mail_cleaner(email):
+	start = '&lt;'
+	end = '&gt;'
+	mail_list = []
+	components = mail.split(',')
+	for s in components:
+		mail_list.append(s[s.find(start)+len(start):s.rfind(end)])
+	return mail_list
+		

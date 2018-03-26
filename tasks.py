@@ -1,6 +1,6 @@
 from celery import Celery
 import requests
-from mail_parser import mail_parser
+from mail_parser import mail_parser, mail_cleaner
 import json
 from config import BASE_API, BASE_ZOHO, AUTH_ZOHO
 
@@ -33,7 +33,7 @@ def get_unread_emails():
 		if event_data:
 			read_mail.append(str(mail[0]))
 			event_data["from"] = mail[3]
-			event_data["email_list"] = mail[2].replace('&lt;', '').replace('&gt;', '').split(',')
+			event_data["email_list"] = mail_cleaner(mail[2])
 			create_request = BASE_API + "/v1/create-event-from-email"
 			event_create = requests.post(create_request, data = json.dumps(event_data), headers = headers)
 
